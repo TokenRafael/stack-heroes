@@ -71,7 +71,7 @@ export class HeroesService {
                  ),
                  new Move(
                    'ComponentDidAttack',
-                   'It creates a component top attack you',
+                   'It creates a component to attack you',
                    15,
                    20,
                    MoveType.atk

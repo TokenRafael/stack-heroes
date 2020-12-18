@@ -2,3 +2,38 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+pre {
+  background: gray;
+  border: 2px solid black;
+}
+.row {
+  display: flex;
+  flex: 1 0 10px;
+  flex-direction: row;
+  justify-content: space-between;
+  .center {
+    align-items: center;
+  }
+  .top {
+    align-items: flex-start;
+  }
+  .col {
+    min-width: 14%;
+    max-width: 50%;
+  }
+}
+.color-red {
+  color: #d50000;
+}
+.color-orange {
+  color: #ff6f00;
+}
+.color-yellow {
+  color: #ffca28;
+}
+.color-blue {
+  color: #1e88e5;
+}
+.color-green {
+  color: #00e676
+}

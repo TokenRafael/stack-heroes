@@ -14,7 +14,7 @@ export class Move {
   }
 
   use(): boolean {
-    if (uses - 1 <= 0)
+    if (this.uses - 1 <= 0)
       return false;
     else {
       this.uses--;

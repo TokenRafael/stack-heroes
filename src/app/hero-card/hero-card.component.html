@@ -1,0 +1,54 @@
+<mat-card>
+  <mat-card-title>{{ hero.name }}</mat-card-title>
+  <mat-card-subtitle>Front-end</mat-card-subtitle>
+  <img mat-card-image [src]="'assets/heroes/'+hero.image+'.png'">
+  <mat-card-content>
+    <div class="row top">
+      <div class="col">
+        <h3>Health:</h3>
+        <div class="row center">
+          <p>{{ hero.health }}</p>
+          <mat-icon class="color-green">health_and_safety</mat-icon>
+        </div>
+      </div>
+    </div>
+    <mat-accordion>
+      <mat-expansion-panel
+        *ngFor="let m of hero.moveset"
+        >
+
+        <mat-expansion-panel-header>
+
+          <mat-panel-title>{{ m.name }}</mat-panel-title>
+
+          <mat-panel-subtitle>
+            <mat-icon [svgIcon]="getIcon(m)" [ngClass]="getIconColor(m)">
+            </mat-icon>
+          </mat-panel-subtitle>
+        </mat-expansion-panel-header>
+        <div class="row top">
+          <div class="col">
+            <h3>Power:</h3>
+            <div class="row center">
+              <p>{{ m.pwr }}</p>
+              <mat-icon class="color-red">local_fire_department</mat-icon>
+            </div>
+          </div>
+
+          <div class="col">
+            <h3>Uses:</h3>
+            <div class="row center">
+              <p>{{ m.maxUsage }}</p>
+              <mat-icon class="color-yellow">flash_on</mat-icon>
+            </div>
+          </div>
+
+          <div class="col">
+            <h3>Description: </h3>
+            <p>{{ m.message }}</p>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+</mat-card>
