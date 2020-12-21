@@ -1,7 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+import { TeamPickerComponent } from './home/team-picker/team-picker.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: TeamPickerComponent
+  },
+  {
+    path: 'game',
+    loadChildren: () => import('./game/game.module').then(m => m.GameModule)
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
+  }
+
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

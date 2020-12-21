@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+  background-image: url('assets/Background.png');
+  background-repeat: repeat;
+  background-size: 500px;
+}
 pre {
   background: gray;
   border: 2px solid black;
@@ -17,9 +21,13 @@ pre {
   .top {
     align-items: flex-start;
   }
+  .stretch {
+    align-items: stretch;
+  }
   .col {
     min-width: 14%;
     max-width: 50%;
+    margin: 0 3px;
   }
 }
 .color-red {

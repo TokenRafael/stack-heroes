@@ -1,0 +1,11 @@
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ name }}</mat-label>
+    <mat-select [(value)]="picked">
+      <mat-option *ngFor="let hero of stack; let i = index" [value]="i">
+        {{ hero.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <app-hero-card [hero]="stack[picked]" [stack]="name"></app-hero-card>
+</div>

@@ -11,22 +11,27 @@ import { MatIconModule } from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HeroCardComponent } from './hero-card/hero-card.component';
+import { HomeModule } from './home/home.module';
+import { NotFoundComponent } from './not-found/not-found.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeroCardComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+
     MatCardModule,
     MatGridListModule,
     MatExpansionModule,
-    MatIconModule
+    MatIconModule,
+
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

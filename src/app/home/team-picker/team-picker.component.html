@@ -1,0 +1,18 @@
+<img class="hero-image" src="assets/Title.png" alt="Hero-image">
+<mat-card>
+  <mat-card-title>Choose your team</mat-card-title>
+  <mat-card-content>
+    <div class="row stretch">
+      <div class="col">
+        <app-stack-picker [stack]="heroes.front" name="Front-end"></app-stack-picker>
+      </div>
+      <div class="col">
+        <app-stack-picker [stack]="heroes.back" name="Back-end"></app-stack-picker>
+      </div>
+      <div class="col">
+        <app-stack-picker [stack]="heroes.db" name="Database"></app-stack-picker>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<app-game-picker></app-game-picker>
