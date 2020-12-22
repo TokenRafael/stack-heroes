@@ -1,7 +1,7 @@
 <div>
   <mat-form-field appearance="fill">
     <mat-label>{{ name }}</mat-label>
-    <mat-select [(value)]="picked">
+    <mat-select [(value)]="picked" (selectionChange)="updateHero()">
       <mat-option *ngFor="let hero of stack; let i = index" [value]="i">
         {{ hero.name }}
       </mat-option>

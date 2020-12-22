@@ -17,6 +17,7 @@ export class Hero {
 
   damage(pwr: number): boolean {
     this.health -= pwr;
+    if (this.health <= 0) this.health = 0;
     return (this.health <= 0);
   }
 

@@ -1,0 +1,16 @@
+div {
+  width: 200px;
+  height: 100px;
+  position: relative;
+  img {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 60px;
+  }
+  app-hexa-button {
+    position: absolute;
+    top: 60px;
+    width: 100%;
+  }
+}

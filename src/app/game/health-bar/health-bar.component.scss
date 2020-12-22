@@ -1,0 +1,28 @@
+.wrapper {
+  width: 100%;
+}
+.health {
+  background-color: black;
+  border-radius: 2px;
+  color: white;
+  font-weight: bolder;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+}
+.meter {
+  height: 10px;
+  width: 70%;
+  position: relative;
+  background-color: white;
+  border-radius: 1px;
+  padding: 2px;
+  margin-left: 5px;
+  span {
+    display: block;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+}

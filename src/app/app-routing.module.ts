@@ -6,12 +6,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: TeamPickerComponent
-  },
-  {
     path: 'game',
     loadChildren: () => import('./game/game.module').then(m => m.GameModule)
+  },
+  {
+    path: '',
+    component: TeamPickerComponent
   },
   {
     path: '**',

@@ -1,0 +1,35 @@
+.field-wrap {
+  position: relative;
+}
+.field {
+  padding: 15px;
+  height: 500px;
+  border: solid 2px #aaaaaa;
+  text-align: center;
+  display: grid;
+  grid-template-areas: 
+  ". c1 . . . . e1 ."
+  ". . c2 . . e2 . ."
+  ". c3 . . . . e3 ."
+  ;
+  .hero-grid {
+    &:nth-child(1) {
+      grid-area: c2;
+    }
+    &:nth-child(2) {
+      grid-area: c1;
+    }
+    &:nth-child(3) {
+      grid-area: c3;
+    }
+    &:nth-child(4) {
+      grid-area: e2;
+    }
+    &:nth-child(5) {
+      grid-area: e1;
+    }
+    &:nth-child(6) {
+      grid-area: e3;
+    }
+  }
+}

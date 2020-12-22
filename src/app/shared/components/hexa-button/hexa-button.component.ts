@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-hexa-button',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HexaButtonComponent implements OnInit {
 
+  @Input() disabled = false;
+  @Output() Click = new EventEmitter();
+  audio = new Audio('assets/sound/button-click.wav');
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  emitClick(): void {
+    this.audio.play();
+    this.Click.emit('');
   }
 
 }

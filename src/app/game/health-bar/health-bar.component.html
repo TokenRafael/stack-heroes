@@ -1,0 +1,16 @@
+<div class="wrapper">
+  <div class="health" [style.background]="dead?'gray':'black'">
+    HP
+    <div class="meter">
+      <span
+        [style.width]="getPercentage() + '%'"
+        [style.background]="getColor()"
+        class="progress">
+
+        </span>
+    </div>
+  </div>
+  <div class="numeric">
+    <p>{{ life }}/{{ maxLife }}</p>
+  </div>
+</div>

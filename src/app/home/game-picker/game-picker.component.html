@@ -2,14 +2,16 @@
   <mat-card-title>Start Game</mat-card-title>
   <mat-card-content>
     <div class="row">
-      <button class="col" mat-button color="basic">Create Game</button>
+      <app-hexa-button>Create game</app-hexa-button>
       <h3>OR</h3>
       <div class="col">
-        <mat-form-field appearance="legacy">
-          <mat-label>Game code</mat-label>
-          <input type="text" matInput placeholder="0123456789abc">
-        </mat-form-field>
-        <button style="margin-left: 5px" mat-button color="primary">Join game</button>
+        <div class="row">
+          <mat-form-field appearance="legacy">
+            <mat-label>Game code</mat-label>
+            <input type="text" matInput placeholder="0123456789abc">
+          </mat-form-field>
+          <app-hexa-button style="margin-left: 30px">Join game</app-hexa-button>
+        </div>
       </div>
     </div>
   </mat-card-content>

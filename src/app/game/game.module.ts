@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameScreenComponent } from './game-screen/game-screen.component';
 
+import { GameRoutingModule } from './game-routing.module';
+import { GameComponent } from './game.component';
+import { SharedModule } from '../shared/shared.module';
+import { GameFieldComponent } from './game-field/game-field.component';
+import { FieldCharComponent } from './field-char/field-char.component';
+import { HealthBarComponent } from './health-bar/health-bar.component';
 
 
 @NgModule({
-  declarations: [GameScreenComponent],
+  declarations: [GameComponent, GameFieldComponent, FieldCharComponent, HealthBarComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    GameRoutingModule,
+    SharedModule
   ]
 })
 export class GameModule { }

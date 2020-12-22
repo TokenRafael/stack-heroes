@@ -1,0 +1,30 @@
+.hexa-button {
+  border: 4px solid #547d5f;
+  padding: 15px 20px;
+  margin: 10px 0;
+  font-family: "Courier New";
+  border-radius: 15px 5px 15px 5px;
+  text-align: right;
+  box-shadow: 4px 4px 5px #00000077;
+  cursor: pointer;
+  background-color: white;
+  transition: 0.2s;
+  &:hover {
+    border-color: #e3d64d;
+    transform: translate(-3px, -3px);
+    box-shadow: 7px 7px 7px #00000077;
+  }
+  &:active {
+    border-color: yellowgreen;
+    transition: 0s;
+  }
+}
+.disabled {
+  border-color: gray;
+  cursor: unset;
+  &:hover {
+    border-color: gray;
+    transform: unset;
+    box-shadow: 4px 4px 5px #00000077;
+  }
+}

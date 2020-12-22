@@ -1,0 +1,8 @@
+<div>
+  <div class="floor"></div>
+  <img [src]="'assets/heroes/'+hero.image+'.png'" alt="hero">
+  <app-hexa-button (click)="onClick()" [disabled]="checkHealth()">
+    <h4>{{ hero.name }}</h4>
+    <app-health-bar [life]="hero.health" [maxLife]="hero.maxHealth" [dead]="checkHealth()"></app-health-bar>
+  </app-hexa-button>
+</div>

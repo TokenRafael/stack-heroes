@@ -1,1 +1,3 @@
-<p>hexa-button works!</p>
+<button [disabled]="disabled" (click)="emitClick()" class="hexa-button" [class.disabled]="disabled">
+  <ng-content></ng-content>
+</button>

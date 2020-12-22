@@ -13,6 +13,7 @@ import { HeroCardComponent } from './hero-card/hero-card.component';
 import { TeamPickerComponent } from './team-picker/team-picker.component';
 import { StackPickerComponent } from './stack-picker/stack-picker.component';
 import { GamePickerComponent } from './game-picker/game-picker.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -32,7 +33,9 @@ import { GamePickerComponent } from './game-picker/game-picker.component';
     MatIconModule,
     MatSelectModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+
+    SharedModule
   ],
   exports: [
   ]

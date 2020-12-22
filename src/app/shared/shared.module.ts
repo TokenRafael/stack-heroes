@@ -8,6 +8,9 @@ import { HexaButtonComponent } from './components/hexa-button/hexa-button.compon
   declarations: [HexaButtonComponent],
   imports: [
     CommonModule
+  ],
+  exports: [
+    HexaButtonComponent
   ]
 })
 export class SharedModule { }
