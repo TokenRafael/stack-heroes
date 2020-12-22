@@ -1,16 +1,33 @@
 div {
   width: 200px;
-  height: 100px;
+  height: 230px;
   position: relative;
   img {
     position: absolute;
-    left: 50%;
+    left: (100px-30px);
     top: 0;
     width: 60px;
   }
+  .dead {
+    filter: grayscale(100%);
+  }
   app-hexa-button {
     position: absolute;
-    top: 60px;
+    top: 80px;
+    left: 0;
     width: 100%;
+    div {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .floor {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #00000055;
   }
 }

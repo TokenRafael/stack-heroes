@@ -23,9 +23,9 @@ export class GameFieldComponent implements OnInit {
     this.playerTeam = this.teamService.getTeam();
     this.enemyTeam = this.teamService.getTeam();
     this.dummyTeam = {
-      front: this.heroService.getHero('front', 1),
-      back: this.heroService.getHero('back', 1),
-      db: this.heroService.getHero('db', 1)
+      front: this.heroService.getHero('front', 2),
+      back: this.heroService.getHero('back', 2),
+      db: this.heroService.getHero('db', 2)
     };
   }
 
