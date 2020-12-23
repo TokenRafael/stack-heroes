@@ -1,10 +1,20 @@
 <div>
   <div class="floor"></div>
-  <img [src]="'assets/heroes/'+hero.image+'.png'" alt="hero" [class.dead]="checkHealth()">
+  <img
+    class="char"
+    [src]="'assets/heroes/'+hero.image+'.gif'"
+    alt="hero"
+    [class.flipped]="flipped"
+    [class.dead]="checkHealth()">
   <app-hexa-button (click)="onClick()" [disabled]="checkHealth()">
     <div>
       <h4>{{ hero.name }}</h4>
       <app-health-bar [life]="hero.health" [maxLife]="hero.maxHealth" [dead]="checkHealth()"></app-health-bar>
     </div>
   </app-hexa-button>
+  <img
+    *ngIf="chosen"
+    class="arrow"
+    src="assets/Arrow.gif"
+    alt="arrow">
 </div>

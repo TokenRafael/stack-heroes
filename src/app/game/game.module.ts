@@ -7,10 +7,11 @@ import { SharedModule } from '../shared/shared.module';
 import { GameFieldComponent } from './game-field/game-field.component';
 import { FieldCharComponent } from './field-char/field-char.component';
 import { HealthBarComponent } from './health-bar/health-bar.component';
+import { ActionChooseComponent } from './action-choose/action-choose.component';
 
 
 @NgModule({
-  declarations: [GameComponent, GameFieldComponent, FieldCharComponent, HealthBarComponent],
+  declarations: [GameComponent, GameFieldComponent, FieldCharComponent, HealthBarComponent, ActionChooseComponent],
   imports: [
     CommonModule,
     GameRoutingModule,

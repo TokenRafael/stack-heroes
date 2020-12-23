@@ -1,7 +1,22 @@
-<p>game-field works!</p>
 <div class="field-wrap">
   <div class="field">
-    <app-field-char class="hero-grid" *ngFor="let h of getIterable(dummyTeam)" [hero]="h"></app-field-char>
-    <app-field-char class="hero-grid" *ngFor="let h of getIterable(dummyTeam)" [hero]="h"></app-field-char>
+    <app-field-char
+      [chosen]="friendChosen === i"
+      class="hero-grid"
+      *ngFor="let h of getIterable(dummyTeam); let i = index"
+      (click)="friendChosen = i"
+      [hero]="h"></app-field-char>
+    <app-field-char
+      [chosen]="enemyChosen === i"
+      [flipped]="true"
+      class="hero-grid"
+      *ngFor="let h of getIterable(dummyTeam); let i = index"
+      (click)="enemyChosen = i"
+      [hero]="h"></app-field-char>
+    <div class="msg">
+      <app-hexa-button *ngIf="msg">
+        {{ msg }}
+      </app-hexa-button>
+    </div>
   </div>
 </div>

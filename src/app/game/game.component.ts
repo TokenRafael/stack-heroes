@@ -7,13 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+  ) { }
 
   ngOnInit(): void {
   }
 
-  clickTest(): void {
-    console.log('click');
-  }
 
 }

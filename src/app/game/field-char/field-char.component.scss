@@ -2,11 +2,17 @@ div {
   width: 200px;
   height: 230px;
   position: relative;
-  img {
+  .arrow {
     position: absolute;
-    left: (100px-30px);
+    width: 30px;
+    top: -35px;
+    left: 100px-15px;
+  }
+  .char {
+    position: absolute;
+    left: (100px-40px);
     top: 0;
-    width: 60px;
+    width: 80px;
   }
   .dead {
     filter: grayscale(100%);
@@ -24,10 +30,13 @@ div {
 
   .floor {
     position: absolute;
-    top: 50px;
+    top: 60px;
     width: 100%;
     height: 30px;
     border-radius: 50%;
     background-color: #00000055;
   }
+   .flipped {
+     transform: scaleX(-1);
+   }
 }

@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { EventEmitter } from 'events';
 
 import { Hero } from 'src/app/shared/models/hero';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-field-char',
@@ -10,15 +12,24 @@ import { Hero } from 'src/app/shared/models/hero';
 export class FieldCharComponent implements OnInit {
 
   @Input() hero: Hero;
+  @Input() flipped = false;
+  @Input() chosen = false;
 
-  constructor() { }
+  @Output() Click = new EventEmitter();
+
+  constructor(
+    private msgService: MessageService
+  ) { }
 
   ngOnInit(): void {
+    console.info(this.hero.name, this.flipped);
   }
 
   onClick(): void {
     this.hero.damage(10);
-    console.log(this.hero);
+    this.msgService.setMessage(`${this.hero.name} says ${this.hero.moveset[0].message}`);
+
+    this.Click.emit('');
   }
 
   checkHealth(): boolean {
