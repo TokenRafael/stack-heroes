@@ -7,8 +7,8 @@
   grid-template-areas: 
   ". c1 . . . . e1 ."
   ". c1 . . . . e1 ."
-  ". . c2 . . e2 . ."
-  ". . c2 . . e2 . ."
+  ". . c2 v v e2 . ."
+  ". . c2 v v e2 . ."
   ". c3 m m m m e3 ."
   ". c3 m m m m e3 ."
   ;
@@ -34,7 +34,12 @@
   }
   .msg {
     margin-top: 20px;
-    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
     grid-area: m;
+  }
+  .vs {
+    grid-area: v;
   }
 }

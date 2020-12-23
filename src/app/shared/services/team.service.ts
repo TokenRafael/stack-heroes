@@ -1,27 +1,34 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Hero } from '../models/hero';
+import { HeroesService } from './heroes.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamService {
 
-  private team = {
-    front: null,
-    back: null,
-    db: null
-  };
+  private team: Hero[] = [
+    this.heroService.getHero('front', 0),
+    this.heroService.getHero('back', 0),
+    this.heroService.getHero('db', 0),
+  ];
 
-  constructor() { }
+  teamChanged = new Subject<Hero[]>();
+
+  constructor(
+    private heroService: HeroesService
+  ) { }
 
   setHero(stack: string, h: Hero): void {
     if (stack === 'Front-end') {
-      this.team.front = h;
+      this.team[0] = h;
     } else if (stack === 'Back-end') {
-      this.team.back = h;
+      this.team[1] = h;
     } else if (stack === 'Database') {
-      this.team.db = h;
+      this.team[2] = h;
     }
+    this.teamChanged.next(this.team);
   }
 
   getTeam(): any {

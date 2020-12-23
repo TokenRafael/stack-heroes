@@ -18,7 +18,6 @@ export class StackPickerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.teamService.setHero(this.name, this.stack[0]);
   }
 
 

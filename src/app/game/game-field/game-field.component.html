@@ -3,14 +3,14 @@
     <app-field-char
       [chosen]="friendChosen === i"
       class="hero-grid"
-      *ngFor="let h of getIterable(dummyTeam); let i = index"
+      *ngFor="let h of playerTeam; let i = index"
       (click)="friendChosen = i"
       [hero]="h"></app-field-char>
     <app-field-char
       [chosen]="enemyChosen === i"
       [flipped]="true"
       class="hero-grid"
-      *ngFor="let h of getIterable(dummyTeam); let i = index"
+      *ngFor="let h of enemyTeam; let i = index"
       (click)="enemyChosen = i"
       [hero]="h"></app-field-char>
     <div class="msg">
