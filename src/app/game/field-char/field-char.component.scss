@@ -37,6 +37,6 @@ div {
     background-color: #00000055;
   }
    .flipped {
-     transform: scaleX(-1);
+     transform: rotateY(180deg);
    }
 }

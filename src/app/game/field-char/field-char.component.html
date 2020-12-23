@@ -5,7 +5,10 @@
     [src]="'assets/heroes/'+hero.image+'.gif'"
     alt="hero"
     [class.flipped]="flipped"
-    [class.dead]="checkHealth()">
+    [class.dead]="checkHealth()"
+    [@onDamageAnimation]="animState"
+    (@onDamageAnimation.done)="resetAnim()"
+    >
   <app-hexa-button (click)="onClick()" [disabled]="checkHealth()">
     <div>
       <h4>{{ hero.name }}</h4>
