@@ -25,7 +25,7 @@ export class GameFieldComponent implements OnInit, OnDestroy {
   msgSubscription: Subscription;
   teamSubscription: Subscription;
 
-  timer$: BehaviorSubject<number>;
+  timer$: BehaviorSubject<string>;
 
   constructor(
     private teamService: TeamService,
@@ -44,7 +44,7 @@ export class GameFieldComponent implements OnInit, OnDestroy {
 
     this.route.data.pipe(take(1)).subscribe(
       (data: Data) => {
-        this.msgService.setMessage(`Let your friend join your room! Send him your code!`);
+        this.msgService.setMessage(`Send your opponent your room code: ${data.roomId}. Click here to copy 📎`);
         this.id = data.roomId;
       }
     );
@@ -60,12 +60,17 @@ export class GameFieldComponent implements OnInit, OnDestroy {
     this.teamSubscription.unsubscribe();
   }
 
-  getIterable(obj: any): Hero[] {
-    return [
-      obj.front,
-      obj.back,
-      obj.db
-    ];
+  chooseFriend(index: number): void {
+    this.game.friendChosen = index;
+    this.friendChosen = this.game.friendChosen;
   }
 
+  chooseEnemy(index: number): void {
+    this.game.enemyChosen = index;
+    this.enemyChosen = this.game.enemyChosen;
+  }
+
+  msgButtonHandler(): void {
+    this.game.next();
+  }
 }

@@ -4,22 +4,22 @@
       [chosen]="friendChosen === i"
       class="hero-grid"
       *ngFor="let h of playerTeam; let i = index"
-      (click)="friendChosen = i"
+      (click)="chooseFriend(i)"
       [hero]="h"></app-field-char>
     <app-field-char
       [chosen]="enemyChosen === i"
       [flipped]="true"
       class="hero-grid"
       *ngFor="let h of enemyTeam; let i = index"
-      (click)="enemyChosen = i"
+      (click)="chooseEnemy(i)"
       [hero]="h"></app-field-char>
     <div class="msg">
-      <app-hexa-button *ngIf="msg">
+      <app-hexa-button *ngIf="msg" (click)="msgButtonHandler()">
         {{ msg }}
       </app-hexa-button>
     </div>
     <div class="timer">
-      <h2>{{ timer$ | async }}s</h2>
+      <h2>{{ timer$ | async }}</h2>
     </div>
     <div class="room">
       <h1>Room: {{ id }}</h1>

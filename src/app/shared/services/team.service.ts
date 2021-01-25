@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Hero } from '../models/hero';
 import { HeroesService } from './heroes.service';
 
@@ -22,7 +22,7 @@ export class TeamService {
    private heroDamaged$ = new Subject<Hero>();
 
   teamChanged = new Subject<Hero[]>();
-  enemyTeamChanged = new Subject<Hero[]>();
+  enemyTeamChanged = new BehaviorSubject<Hero[]>(null);
 
   constructor(
     private heroService: HeroesService

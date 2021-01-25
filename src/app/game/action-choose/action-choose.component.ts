@@ -1,3 +1,4 @@
+import { GameService } from 'src/app/game/game.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Hero } from 'src/app/shared/models/hero';
@@ -18,7 +19,8 @@ export class ActionChooseComponent implements OnInit, OnDestroy {
 
   constructor(
     private teamService: TeamService,
-    private msgService: MessageService
+    private msgService: MessageService,
+    private gameService: GameService
   ) { }
 
   ngOnInit(): void {
@@ -37,8 +39,8 @@ export class ActionChooseComponent implements OnInit, OnDestroy {
   }
 
   chooseMove(move: Move): void {
-    console.log(move);
     this.msgService.setMessage(`${this.heroes[this.choosingIndex].name} will use ${move.name}.`);
+    this.gameService.registerMove(move);
     this.choosingIndex++;
   }
 

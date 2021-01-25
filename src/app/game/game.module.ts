@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 import { GameRoutingModule } from './game-routing.module';
 import { GameComponent } from './game.component';
@@ -15,7 +16,8 @@ import { ActionChooseComponent } from './action-choose/action-choose.component';
   imports: [
     CommonModule,
     GameRoutingModule,
-    SharedModule
+    SharedModule,
+    ClipboardModule
   ]
 })
 export class GameModule { }
