@@ -13,7 +13,8 @@ import { MessageService } from '../message.service';
 })
 export class ActionChooseComponent implements OnInit, OnDestroy {
 
-  choosingIndex = 0;
+  choosingIndex: number;
+  indexSubscription: Subscription;
   heroes: Hero[];
   heroesSubscription: Subscription;
 
@@ -28,10 +29,14 @@ export class ActionChooseComponent implements OnInit, OnDestroy {
     this.heroesSubscription = this.teamService.teamChanged.subscribe(
       newHeroes => this.heroes = newHeroes
     );
+    this.indexSubscription = this.gameService.choosingIndex$.subscribe(value => {
+      this.choosingIndex = value;
+    });
   }
 
   ngOnDestroy(): void {
     this.heroesSubscription.unsubscribe();
+    this.indexSubscription.unsubscribe();
   }
 
   getMoveset(): Move[] {
@@ -41,7 +46,6 @@ export class ActionChooseComponent implements OnInit, OnDestroy {
   chooseMove(move: Move): void {
     this.msgService.setMessage(`${this.heroes[this.choosingIndex].name} will use ${move.name}.`);
     this.gameService.registerMove(move);
-    this.choosingIndex++;
   }
 
 }

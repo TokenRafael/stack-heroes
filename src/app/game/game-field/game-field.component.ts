@@ -44,7 +44,6 @@ export class GameFieldComponent implements OnInit, OnDestroy {
 
     this.route.data.pipe(take(1)).subscribe(
       (data: Data) => {
-        this.msgService.setMessage(`Send your opponent your room code: ${data.roomId}. Click here to copy 📎`);
         this.id = data.roomId;
       }
     );

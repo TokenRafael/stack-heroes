@@ -41,7 +41,10 @@ export class TeamService {
   }
 
   setEnemyTeam(team: Hero[]): void {
-    this.enemyTeam = team;
+    this.enemyTeam = team.map((hero, index): Hero => {
+      const stackName = ['front', 'back', 'db'][index];
+      return this.heroService.getHeroByName(stackName, hero.name);
+    });
     this.enemyTeamChanged.next(this.enemyTeam);
   }
 
@@ -57,7 +60,7 @@ export class TeamService {
     return this.heroDamaged$;
   }
 
-  private getHero(team: number, i: number): Hero {
+  getHero(team: number, i: number): Hero {
     if (team === 0)
       return this.team[i];
     else if (team === 1)
@@ -68,6 +71,7 @@ export class TeamService {
 
   damage(team: number, i: number, pwr: number): void {
     const selectedHero = this.getHero(team, i);
+    console.log(selectedHero);
     if (selectedHero) {
         selectedHero.damage(pwr);
         this.heroDamaged$.next(selectedHero);
@@ -75,11 +79,13 @@ export class TeamService {
   }
   heal(team: number, i: number, pwr: number): void {
     const selectedHero = this.getHero(team, i);
+    console.log(selectedHero);
     if (selectedHero)
       selectedHero.heal(pwr);
   }
   shield(team: number, i: number): void {
     const selectedHero = this.getHero(team, i);
+    console.log(selectedHero);
     if (selectedHero)
       selectedHero.buildShield();
   }

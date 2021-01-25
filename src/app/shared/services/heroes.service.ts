@@ -294,9 +294,11 @@ export class HeroesService {
     return clone;
   }
 
-  parseMessage(msg: string, heroName: string): string {
-    const newMsg = msg.replace(/The hero/g, heroName);
-    console.log(newMsg);
-    return newMsg;
+  getHeroByName(stack: string, name: string): Hero {
+    let clone: Hero = Object.assign(
+      Object.create(this.heroes[stack].find(hero => hero.name === name)),
+      this.heroes[stack].find(hero => hero.name === name)
+    );
+    return clone;
   }
 }
