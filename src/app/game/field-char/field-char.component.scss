@@ -8,11 +8,19 @@ div {
     top: -35px;
     left: 100px-15px;
   }
-  .char {
+  img {
     position: absolute;
     left: (100px-40px);
     top: 0;
     width: 80px;
+  }
+  .shield {
+    transform: scale(130%, 130%);
+    opacity: 0.3;
+    filter: invert(.5)
+      sepia(1)
+      saturate(3)
+      hue-rotate(100deg);
   }
   .dead {
     filter: grayscale(100%);

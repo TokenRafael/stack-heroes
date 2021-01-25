@@ -1,8 +1,10 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { EventEmitter } from 'events';
+import { Subscription } from 'rxjs';
 
 import { Hero } from 'src/app/shared/models/hero';
+import { TeamService } from 'src/app/shared/services/team.service';
 import { MessageService } from '../message.service';
 
 @Component({
@@ -36,7 +38,7 @@ import { MessageService } from '../message.service';
     ])
   ]
 })
-export class FieldCharComponent implements OnInit {
+export class FieldCharComponent implements OnInit, OnDestroy {
 
   @Input() hero: Hero;
   @Input() flipped = false;
@@ -46,19 +48,25 @@ export class FieldCharComponent implements OnInit {
 
   animState = null;
 
+  heroDamaged$: Subscription;
+
   constructor(
-    private msgService: MessageService
+    private teamService: TeamService
   ) { }
 
   ngOnInit(): void {
-    console.info(this.hero.name, this.flipped);
+    this.heroDamaged$ = this.teamService.getHeroDamageEvent().subscribe(
+      (hero: Hero) => {
+        if (hero === this.hero)
+          this.animState = this.flipped ? 'damInv' : 'dam';
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.heroDamaged$.unsubscribe();
   }
 
   onClick(): void {
-    this.hero.damage(10);
-    this.msgService.setMessage(`${this.hero.name} says ${this.hero.moveset[0].message}`);
-
-    this.animState = this.flipped ? 'damInv' : 'dam';
     this.Click.emit('');
   }
 

@@ -5,8 +5,8 @@
   text-align: center;
   display: grid;
   grid-template-areas: 
-  ". c1 . . . . e1 ."
-  ". c1 . . . . e1 ."
+  ". c1 . r r . e1 ."
+  ". c1 . t t . e1 ."
   ". . c2 v v e2 . ."
   ". . c2 v v e2 . ."
   ". c3 m m m m e3 ."
@@ -41,5 +41,12 @@
   }
   .vs {
     grid-area: v;
+  }
+  .timer {
+    grid-area: t;
+    font-size: 64px;
+  }
+  .room {
+    grid-area: r;
   }
 }

@@ -14,7 +14,6 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

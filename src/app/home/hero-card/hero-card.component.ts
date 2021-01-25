@@ -16,7 +16,6 @@ export class HeroCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.hero);
   }
 
   getIconColor(thisMove: Move): any {

@@ -18,5 +18,11 @@
         {{ msg }}
       </app-hexa-button>
     </div>
+    <div class="timer">
+      <h2>{{ timer$ | async }}s</h2>
+    </div>
+    <div class="room">
+      <h1>Room: {{ id }}</h1>
+    </div>
   </div>
 </div>

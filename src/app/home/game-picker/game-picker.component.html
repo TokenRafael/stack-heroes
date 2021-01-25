@@ -1,16 +1,31 @@
 <mat-card>
-  <mat-card-title>Start Game</mat-card-title>
+  <mat-card-header>
+    <mat-card-title> {{ connected ? 'Start Game' : 'Trying to connect...' }} </mat-card-title>
+    <mat-progress-spinner *ngIf="!connected" mode="indeterminate" color="primary" diameter="40"></mat-progress-spinner>
+  </mat-card-header>
   <mat-card-content>
     <div class="row">
-      <app-hexa-button>Create game</app-hexa-button>
+      <app-hexa-button
+        (click)="createGame()"
+        [disabled]="!connected"
+        >Create game</app-hexa-button>
       <h3>OR</h3>
       <div class="col">
         <div class="row">
           <mat-form-field appearance="legacy">
             <mat-label>Game code</mat-label>
-            <input type="text" matInput placeholder="0123456789abc">
+            <input
+            type="text"
+            matInput
+            [(ngModel)]="id"
+            placeholder="0123456789abc">
           </mat-form-field>
-          <app-hexa-button style="margin-left: 30px">Join game</app-hexa-button>
+          <app-hexa-button
+            [disabled]="!connected"
+            (click)="joinGame()"
+            style="margin-left: 30px">
+            Join game
+          </app-hexa-button>
         </div>
       </div>
     </div>
