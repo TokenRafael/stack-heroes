@@ -42,10 +42,13 @@ export class GameService {
 
     // Connection events
     this.socket.on('connect', () => this.connected$.next(this.socket.id));
-    this.socket.on('connect_failed', () =>
-      this.connected$.error('Could not connect to server')
-    );
-    this.socket.on('disconnect', () => this.connected$.next(undefined));
+    this.socket.on('connect_failed', () => {
+      this.connected$.error('Could not connect to server');
+    });
+    this.socket.on('disconnect', () => {
+      this.connected$.next(undefined);
+      this.connected$.error('Could not connect to server');
+    });
 
     // Game events
     this.socket.on('timerCount', (count: number) =>
