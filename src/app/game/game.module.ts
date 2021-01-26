@@ -11,6 +11,7 @@ import { FieldCharComponent } from './field-char/field-char.component';
 import { HealthBarComponent } from './health-bar/health-bar.component';
 import { ActionChooseComponent } from './action-choose/action-choose.component';
 import { WinScreenComponent } from './win-screen/win-screen.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { WinScreenComponent } from './win-screen/win-screen.component';
     SharedModule,
     ClipboardModule,
     MatButtonModule,
+    MatIconModule
   ],
 })
 export class GameModule {}

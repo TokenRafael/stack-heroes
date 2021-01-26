@@ -5,6 +5,7 @@ import { Hero } from 'src/app/shared/models/hero';
 import { Move } from 'src/app/shared/models/move';
 import { TeamService } from 'src/app/shared/services/team.service';
 import { MessageService } from '../message.service';
+import { MoveType } from 'src/app/shared/models/move-type.enum';
 
 @Component({
   selector: 'app-action-choose',
@@ -48,4 +49,15 @@ export class ActionChooseComponent implements OnInit, OnDestroy {
     this.gameService.registerMove(move);
   }
 
+  getIconColor(thisMove: Move): any {
+    return {
+      'color-orange': thisMove.type === MoveType.atk,
+      'color-blue': thisMove.type === MoveType.def,
+      'color-green': thisMove.type === MoveType.heal,
+    };
+  }
+
+  getIcon(thisMove: Move): any {
+    return thisMove.type === MoveType.atk ? 'swords' : thisMove.type === MoveType.def ? 'shield' : 'heal' ;
+  }
 }
