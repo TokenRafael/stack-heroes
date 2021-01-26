@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatButtonModule } from '@angular/material/button';
 
 import { GameRoutingModule } from './game-routing.module';
 import { GameComponent } from './game.component';
@@ -9,15 +10,23 @@ import { GameFieldComponent } from './game-field/game-field.component';
 import { FieldCharComponent } from './field-char/field-char.component';
 import { HealthBarComponent } from './health-bar/health-bar.component';
 import { ActionChooseComponent } from './action-choose/action-choose.component';
-
+import { WinScreenComponent } from './win-screen/win-screen.component';
 
 @NgModule({
-  declarations: [GameComponent, GameFieldComponent, FieldCharComponent, HealthBarComponent, ActionChooseComponent],
+  declarations: [
+    GameComponent,
+    GameFieldComponent,
+    FieldCharComponent,
+    HealthBarComponent,
+    ActionChooseComponent,
+    WinScreenComponent,
+  ],
   imports: [
     CommonModule,
     GameRoutingModule,
     SharedModule,
-    ClipboardModule
-  ]
+    ClipboardModule,
+    MatButtonModule,
+  ],
 })
-export class GameModule { }
+export class GameModule {}

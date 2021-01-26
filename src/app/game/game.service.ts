@@ -8,6 +8,7 @@ import { Move } from '../shared/models/move';
 import { MoveType } from '../shared/models/move-type.enum';
 import { TeamService } from '../shared/services/team.service';
 import { MessageService } from './message.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,8 @@ export class GameService {
   constructor(
     private teamService: TeamService,
     private clipboard: Clipboard,
-    private msgService: MessageService
+    private msgService: MessageService,
+    private router: Router
   ) {
     this.connect();
   }
@@ -78,6 +80,10 @@ export class GameService {
         this.next();
       }
     );
+
+    // Colocation events
+    this.socket.on('win', () => this.router.navigate(['game', 'win']));
+    this.socket.on('lose', () => this.router.navigate(['game', 'lose']));
   }
 
   createGame(): void {

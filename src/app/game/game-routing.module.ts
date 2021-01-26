@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { GameComponent } from './game.component';
 import { RoomResolver } from './guards/room.resolver';
+import { WinScreenComponent } from './win-screen/win-screen.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,14 @@ const routes: Routes = [
     resolve: {
       roomId: RoomResolver
     }
+  },
+  {
+    path: 'win',
+    component: WinScreenComponent
+  },
+  {
+    path: 'lose',
+    component: WinScreenComponent
   }
 ];
 
