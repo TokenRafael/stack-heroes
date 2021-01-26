@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HexaButtonComponent } from './components/hexa-button/hexa-button.component';
 
 
@@ -7,7 +8,8 @@ import { HexaButtonComponent } from './components/hexa-button/hexa-button.compon
 @NgModule({
   declarations: [HexaButtonComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    MatSnackBarModule
   ],
   exports: [
     HexaButtonComponent

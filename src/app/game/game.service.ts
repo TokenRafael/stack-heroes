@@ -54,7 +54,7 @@ export class GameService {
     this.socket.on('timerCount', (count: number) =>
       this.timer$.next(count + 's')
     );
-    this.socket.on('timerOut', () => this.timer$.next("Time's up!"));
+    this.socket.on('timerOut', () => this.timer$.next('Time\'s up!'));
     this.socket.on('return:roomId', (id: string) => {
       this.roomId$.next(id);
       this.roomId = id;
@@ -68,7 +68,7 @@ export class GameService {
     });
     this.socket.on('continueGame', () => {
       this.choosingIndex$.next(0);
-    })
+    });
     this.socket.on(
       'actionStack',
       (
@@ -92,11 +92,10 @@ export class GameService {
 
   registerMove(move: Move): void {
     let target: number;
-    if (move.type === MoveType.atk ) {
+    if (move.type === MoveType.atk )
       target = this.enemyChosen;
-    } else {
+    else
       target = this.friendChosen;
-    }
     this.socket.emit('registerMove', move, this.choosingIndex$.getValue(), target);
     this.choosingIndex$.next(this.choosingIndex$.getValue() + 1);
   }

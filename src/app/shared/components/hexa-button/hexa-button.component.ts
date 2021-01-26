@@ -18,6 +18,8 @@ export class HexaButtonComponent implements OnInit {
   }
 
   emitClick(): void {
+    if (this.disabled) return;
+    this.audio.pause();
     this.audio.play();
     this.Click.emit('');
   }

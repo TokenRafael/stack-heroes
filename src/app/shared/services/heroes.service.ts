@@ -20,7 +20,7 @@ export class HeroesService {
         ),
         new Move(
           'Vuetify',
-          'It makes the hero sparkle beultifully',
+          'It makes the hero sparkle beaultifully',
           10,
           25,
           MoveType.atk

@@ -1,12 +1,13 @@
 <div *ngIf="choosingIndex === -1">
   <h2>Waiting for opponents to join...</h2>
 </div>
-<div *ngIf="choosingIndex <= 2">
+<div *ngIf="choosingIndex <= 2 && choosingIndex >= 0">
   <h2>What will {{ heroes[choosingIndex].name }} do?</h2>
   <div class="moveset" *ngIf="choosingIndex <= 2">
     <app-hexa-button
       *ngFor="let m of getMoveset()"
       (click)="chooseMove(m)"
+      [disabled]="m.uses <= 0"
       >
         <div>
           <h3>{{ m.name }}</h3>
