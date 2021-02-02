@@ -14,7 +14,6 @@ private show(msg: string, action: string): void {
       duration: 3000,
       horizontalPosition: 'left'
     });
-  // notification.dismissWithAction();
 }
 
 notify(msg: string): void {

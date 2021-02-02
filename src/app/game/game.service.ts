@@ -9,6 +9,7 @@ import { MoveType } from '../shared/models/move-type.enum';
 import { TeamService } from '../shared/services/team.service';
 import { MessageService } from './message.service';
 import { Router } from '@angular/router';
+import { NotificationService } from '../shared/services/notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,7 @@ export class GameService {
 
   me: string;
   joined = false;
+  ready = false;
   choosingIndex$ = new BehaviorSubject<number>(-1);
 
   moveStack: { move: Move | undefined; player: string; sender: number; target: number }[] = [];
@@ -34,7 +36,8 @@ export class GameService {
     private teamService: TeamService,
     private clipboard: Clipboard,
     private msgService: MessageService,
-    private router: Router
+    private router: Router,
+    private notification: NotificationService
   ) {
     this.connect();
   }
@@ -51,12 +54,17 @@ export class GameService {
       this.connected$.next(undefined);
       this.connected$.error('Could not connect to server');
     });
+    this.socket.on('error', msg => this.notification.error(msg));
 
     // Game events
     this.socket.on('timerCount', (count: number) =>
       this.timer$.next(count + 's')
     );
-    this.socket.on('timerOut', () => this.timer$.next('Time\'s up!'));
+    this.socket.on('timerOut', () => {
+      this.timer$.next('Time\'s up!');
+      while (this.choosingIndex$.getValue() < 3)
+        this.registerMove(undefined);
+    });
     this.socket.on('return:roomId', (id: string) => {
       this.roomId$.next(id);
       this.roomId = id;
@@ -65,16 +73,20 @@ export class GameService {
     this.socket.on('startGame', (team: Hero[]) => {
       this.teamService.setEnemyTeam(team);
       this.joined = true;
+      this.ready = true;
       this.msgService.setMessage('Game Starting');
       this.choosingIndex$.next(0);
     });
     this.socket.on('continueGame', () => {
       this.choosingIndex$.next(0);
+      while (this.teamService.getHero(0, this.choosingIndex$.getValue()).health === 0)
+        this.registerMove(undefined);
+      this.ready = true;
     });
     this.socket.on(
       'actionStack',
       (
-        moveStack: { move: Move | undefined; player: string; sender: number; target: number }[]
+        moveStack: { move: Move | undefined; player: string; sender: number; target: number | null }[]
       ) => {
         this.moveStack = moveStack;
         this.next();
@@ -96,21 +108,23 @@ export class GameService {
     this.me = 'p2';
   }
 
-  registerMove(move: Move): void {
+  registerMove(move: Move | undefined): void {
     let target: number;
-    if (move.type === MoveType.atk )
-      target = this.enemyChosen;
-    else
-      target = this.friendChosen;
+    if (move)
+      if (move.type === MoveType.atk )
+        target = this.enemyChosen;
+      else
+        target = this.friendChosen;
     this.socket.emit('registerMove', move, this.choosingIndex$.getValue(), target);
     this.choosingIndex$.next(this.choosingIndex$.getValue() + 1);
   }
 
   next(): void {
     if (this.moveStack.length === 0)
-      if (this.joined && this.choosingIndex$.getValue() > 2){
+      if (this.joined && this.choosingIndex$.getValue() > 2 && this.ready){
         this.socket.emit('ready');
         this.msgService.setMessage('Ready!');
+        this.ready = false;
       }
       else this.clipboard.copy(this.roomId);
     else {
@@ -125,7 +139,7 @@ export class GameService {
     sender: number;
     target: number;
   }): void {
-    if (Move) {
+    if (thisMove.move) {
       const atkTarget = thisMove.player === this.me ? 1 : 0;
       const restTarget = atkTarget === 1 ? 0 : 1;
       let targetName = '';
