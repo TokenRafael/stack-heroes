@@ -25,9 +25,10 @@ export class GameService {
   me: string;
   joined = false;
   ready = false;
+  moved = false;
   choosingIndex$ = new BehaviorSubject<number>(-1);
 
-  moveStack: { move: Move | undefined; player: string; sender: number; target: number }[] = [];
+  moveStack: { move: Move | null; player: string; sender: number; target: number | null }[] = [];
 
   friendChosen = 0;
   enemyChosen = 0;
@@ -77,25 +78,42 @@ export class GameService {
       this.msgService.setMessage('Game Starting');
       this.choosingIndex$.next(0);
     });
+
     this.socket.on('continueGame', () => {
       this.choosingIndex$.next(0);
-      while (this.teamService.getHero(0, this.choosingIndex$.getValue()).health === 0)
-        this.registerMove(undefined);
+      let skips = 0;
+      this.teamService.getTeam().forEach((hero: Hero) => {
+        if (hero.health <= 0) {
+          this.registerMove(undefined);
+          skips++;
+        }
+      });
+      if (skips === 3)
+        return this.socket.emit('lost');
       this.ready = true;
     });
+
     this.socket.on(
       'actionStack',
       (
-        moveStack: { move: Move | undefined; player: string; sender: number; target: number | null }[]
+        moveStack: { move: Move | null; player: string; sender: number; target: number | null }[]
       ) => {
+        console.log(moveStack);
+        this.timer$.next('Action!');
         this.moveStack = moveStack;
         this.next();
       }
     );
 
     // Colocation events
-    this.socket.on('win', () => this.router.navigate(['game', 'win']));
-    this.socket.on('lose', () => this.router.navigate(['game', 'lose']));
+    this.socket.on('win', () => {
+      this.router.navigate(['game', 'win']);
+      this.socket.emit('leaveGame');
+    });
+    this.socket.on('lose', () => {
+      this.router.navigate(['game', 'lose']);
+      this.socket.emit('leaveGame');
+    });
   }
 
   createGame(): void {
@@ -109,6 +127,7 @@ export class GameService {
   }
 
   registerMove(move: Move | undefined): void {
+    this.moved = true;
     let target: number;
     if (move)
       if (move.type === MoveType.atk )
@@ -120,8 +139,8 @@ export class GameService {
   }
 
   next(): void {
-    if (this.moveStack.length === 0)
-      if (this.joined && this.choosingIndex$.getValue() > 2 && this.ready){
+    if (this.moveStack.length === 0 )
+      if (this.joined && !this.moved && this.choosingIndex$.getValue() > 2 && this.ready){
         this.socket.emit('ready');
         this.msgService.setMessage('Ready!');
         this.ready = false;
@@ -129,7 +148,6 @@ export class GameService {
       else this.clipboard.copy(this.roomId);
     else {
       this.handleMove(this.moveStack[0]);
-      this.moveStack.shift();
     }
   }
 
@@ -139,22 +157,25 @@ export class GameService {
     sender: number;
     target: number;
   }): void {
+    this.moved = false;
+    this.moveStack.shift();
     if (thisMove.move) {
       const atkTarget = thisMove.player === this.me ? 1 : 0;
       const restTarget = atkTarget === 1 ? 0 : 1;
       let targetName = '';
       const senderHero = this.teamService.getHero(restTarget, thisMove.sender);
-      senderHero.moveset.find(move => move.name === thisMove.move.name).use();
-      if (thisMove.move.type === MoveType.atk) {
-        this.teamService.damage(atkTarget, thisMove.target, thisMove.move.pwr);
-        targetName = this.teamService.getHero(atkTarget, thisMove.target).name;
-      } else if (thisMove.move.type === MoveType.def) {
-        this.teamService.shield(restTarget, thisMove.target);
-        targetName = this.teamService.getHero(restTarget, thisMove.target).name;
-      } else {
-        this.teamService.heal(restTarget, thisMove.target, thisMove.move.pwr);
-        targetName = this.teamService.getHero(restTarget, thisMove.target).name;
-      }
+      const canUse = senderHero.moveset.find(move => move.name === thisMove.move.name).use();
+      if (canUse)
+        if (thisMove.move.type === MoveType.atk) {
+          this.teamService.damage(atkTarget, thisMove.target, thisMove.move.pwr);
+          targetName = this.teamService.getHero(atkTarget, thisMove.target).name;
+        } else if (thisMove.move.type === MoveType.def) {
+          this.teamService.shield(restTarget, thisMove.target);
+          targetName = this.teamService.getHero(restTarget, thisMove.target).name;
+        } else {
+          this.teamService.heal(restTarget, thisMove.target, thisMove.move.pwr);
+          targetName = this.teamService.getHero(restTarget, thisMove.target).name;
+        }
 
       this.msgService.setMessage(
         senderHero.name + ' used ' +

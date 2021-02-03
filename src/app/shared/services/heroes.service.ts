@@ -21,7 +21,7 @@ export class HeroesService {
         new Move(
           'Vuetify',
           'It makes the hero sparkle beaultifully',
-          10,
+          30,
           25,
           MoveType.atk
         ),
@@ -37,7 +37,7 @@ export class HeroesService {
         new Move(
           'onHook throw',
           'It throws a onHook at you',
-          15,
+          35,
           20,
           MoveType.atk
         ),
@@ -51,14 +51,14 @@ export class HeroesService {
         new Move(
           'JSXecution',
           'It JSXecutes order 66 on you',
-          15,
+          35,
           20,
           MoveType.atk
         ),
         new Move(
           'ComponentDidAttack',
           'It creates a component to attack you',
-          15,
+          35,
           20,
           MoveType.atk
         ),
@@ -67,7 +67,7 @@ export class HeroesService {
         new Move(
           'Operate the banana',
           "You slip on his banana operator's peel",
-          10,
+          30,
           25,
           MoveType.atk
         ),
@@ -106,14 +106,14 @@ export class HeroesService {
         new Move(
           'Accept my cookies',
           'It injects cookies on your website. Your privacy is now unprotected',
-          15,
+          35,
           20,
           MoveType.atk
         ),
         new Move(
           'Xcute Murder Logic',
           'It sends an XML to your website and downs the server',
-          40,
+          80,
           1,
           MoveType.atk
         ),
@@ -129,7 +129,7 @@ export class HeroesService {
         new Move(
           'Flask of venom',
           'It throws a flask of venom at you. God it burns',
-          20,
+          40,
           20,
           MoveType.atk
         ),
@@ -166,14 +166,14 @@ export class HeroesService {
         new Move(
           'console.attack(gamer)',
           'It uses a method different from log and it scares you',
-          15,
+          35,
           25,
           MoveType.atk
         ),
         new Move(
           'HTML is not a programing language',
           'This hurts your feelings',
-          15,
+          35,
           25,
           MoveType.atk
         ),
@@ -191,7 +191,7 @@ export class HeroesService {
         new Move(
           'Tomic replication',
           'It replicates your data. Since the process is not atomic, some data is lost',
-          35,
+          55,
           2,
           MoveType.atk
         ),
@@ -212,7 +212,7 @@ export class HeroesService {
         new Move(
           'PyMongo.hero.drop()',
           "It drop The hero's collections",
-          1,
+          30,
           5,
           MoveType.atk
         ),
@@ -228,14 +228,14 @@ export class HeroesService {
         new Move(
           'Data bass',
           "It takes a fish out of it's pocket and slaps you. Ouch",
-          15,
+          35,
           15,
           MoveType.atk
         ),
         new Move(
           'SQL injection',
           'It finds a vunerability in your website and steels all your data',
-          25,
+          45,
           10,
           MoveType.atk
         ),
@@ -251,7 +251,7 @@ export class HeroesService {
         new Move(
           'Dynamic entry',
           'It makes a super quick entry on the DB',
-          10,
+          30,
           25,
           MoveType.atk
         ),
@@ -296,8 +296,8 @@ export class HeroesService {
 
   getHeroByName(stack: string, name: string): Hero {
     let clone: Hero = Object.assign(
-      Object.create(this.heroes[stack].find(hero => hero.name === name)),
-      this.heroes[stack].find(hero => hero.name === name)
+      Object.create(this.heroes[stack].find((hero) => hero.name === name)),
+      this.heroes[stack].find((hero) => hero.name === name)
     );
     return clone;
   }

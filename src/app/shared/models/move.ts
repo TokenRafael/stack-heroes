@@ -14,12 +14,9 @@ export class Move {
   }
 
   use(): boolean {
-    if (this.uses - 1 <= 0)
-      return false;
-    else {
-      this.uses--;
-      return true;
-    }
+    const can = this.uses > 0;
+    this.uses = this.uses >= 0 ? this.uses - 1 : 0;
+    return can;
   }
 
 }
