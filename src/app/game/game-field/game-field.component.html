@@ -9,9 +9,10 @@
     <app-field-char
       [chosen]="enemyChosen === i"
       [flipped]="true"
-      class="hero-grid"
-      *ngFor="let h of enemyTeam; let i = index"
+      class="enemy-hero-grid"
+      *ngFor="let h of enemyTeam || [undefined, undefined, undefined]; let i = index"
       (click)="chooseEnemy(i)"
+      [style.grid-area]="'e' + (1 + i)"
       [hero]="h"></app-field-char>
     <div class="msg">
       <app-hexa-button *ngIf="msg" (click)="msgButtonHandler()">

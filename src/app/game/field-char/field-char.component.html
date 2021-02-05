@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="hero !== undefined">
   <div class="floor"></div>
   <img
     class="char"
@@ -25,4 +25,7 @@
     class="arrow"
     src="assets/Arrow.gif"
     alt="arrow">
+</div>
+<div *ngIf="hero===undefined">
+  <img src="assets/heroes/angular.gif" alt="dummy" class="dummy flipped">
 </div>

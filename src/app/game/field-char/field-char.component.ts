@@ -40,7 +40,7 @@ import { MessageService } from '../message.service';
 })
 export class FieldCharComponent implements OnInit, OnDestroy {
 
-  @Input() hero: Hero;
+  @Input() hero: Hero | undefined;
   @Input() flipped = false;
   @Input() chosen = false;
 
@@ -55,6 +55,7 @@ export class FieldCharComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    console.info(this.hero)
     this.heroDamaged$ = this.teamService.getHeroDamageEvent().subscribe(
       (hero: Hero) => {
         if (hero === this.hero)
